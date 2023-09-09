@@ -449,6 +449,20 @@
         alertElement.style.display = 'none';
     }, 3000); // 3000 milidetik = 3 detik
 </script>
+<!-- script harga -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const harga = document.getElementById('harga');
+    
+        harga.addEventListener('input', function () {
+            const value = harga.value.replace(/\D/g, '');
+            const formattedValue = new Intl.NumberFormat('id-ID').format(value);
+    
+            harga.value = formattedValue;
+        });
+    });
+    </script>
+
  <!-- Github buttons -->
  <script async defer src="https://buttons.github.io/buttons.js"></script>
  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

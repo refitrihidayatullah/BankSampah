@@ -49,4 +49,9 @@ class Kategori extends Model
     {
         return parent::setAttribute($key, strtoupper($value));
     }
+    // relasi
+    public function barang()
+    {
+        return $this->hasMany(Barang::class);
+    }
 }
