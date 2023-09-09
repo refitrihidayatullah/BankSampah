@@ -46,7 +46,7 @@
                     <a href="{{url("/kategori/".encrypt($kategori->kd_kategori)."/edit")}}" class="text-secondary font-weight-bold text-xs">
                       Edit
                     </a>
-                    <a href="#" style="margin-left: 10px" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteKategoriModal">
+                    <a href="#" style="margin-left: 10px" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteKategoriModal{{$kategori->kd_kategori}}">
                       Delete
                     </a>
                   </td>
@@ -62,8 +62,8 @@
   </div>
   
   <!-- Modal delete -->
-{{-- @foreach ($data_kategori as $kategori)  --}}
-<div class="modal fade" id="deleteKategoriModal tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach ($data_kategori as $kategori) 
+<div class="modal fade" id="deleteKategoriModal{{$kategori->kd_kategori}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -71,7 +71,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{url("/kategori/")}}" method="POST">
+          <form action="{{url("/kategori/".encrypt($kategori->kd_kategori))}}" method="POST">
             @csrf
             @method('delete')
             Yakin Akan Menghapus Data?
@@ -85,5 +85,5 @@
       </div>
     </div>
   </div>
-  {{-- @endforeach --}}
+  @endforeach
 @endsection

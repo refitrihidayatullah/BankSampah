@@ -91,7 +91,17 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = ValidatorRules::kategoriRules($request->all());
+        if ($validator->fails()) {
+            return redirect("/kategori/" . $id . "/edit")->withErrors($validator)->withInput();
+        }
+        try {
+            $data = $request->except('_token', '_method');
+            Kategori::updateKategori($data, decrypt($id));
+            return redirect("/kategori")->with("success", 'data kategori berhasil di ubah');
+        } catch (\Exception $e) {
+            return redirect('/kategori')->with("failed", 'Terjadi Kesalahan' . $e->getMessage());
+        }
     }
 
     /**
@@ -102,6 +112,11 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Kategori::deleteKategori(decrypt($id));
+            return redirect('/kategori')->with('success', 'data kategori berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect('/kategori')->with('failed', 'Terjadi Kesalahan' . $e->getMessage());
+        }
     }
 }

@@ -34,6 +34,17 @@ class Kategori extends Model
         return static::create($data);
     }
 
+    // update data
+    public static function updateKategori(array $data = [], $id)
+    {
+        return static::where('kd_kategori', $id)->update($data);
+    }
+    // delete data
+    public static function deleteKategori($id)
+    {
+        return static::where('kd_kategori', $id)->delete();
+    }
+
     public function setAttribute($key, $value)
     {
         return parent::setAttribute($key, strtoupper($value));
