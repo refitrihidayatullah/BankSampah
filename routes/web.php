@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/kategori/create', [KategoriController::class, 'create']);
+Route::post('/kategori/store', [KategoriController::class, 'store']);
